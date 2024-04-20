@@ -1,0 +1,63 @@
+<div class="card m-4">
+    <div class="card-body">
+
+        <h5>Edição de livros</h5>
+        <p>Preencha os campos para alterar os dados do livro.</p>
+        <hr />
+
+        <div *ngIf="mensagem" class="alert alert-secondary alert-dismissible fade show" role="alert">
+            <strong>{{mensagem}}</strong>
+            <button type="button" class="btn-close" aria-label="Close" (click)="mensagem = ''">
+            </button>
+        </div>
+
+        <form [formGroup]="formEdicao" (ngSubmit)="onSubmit()">
+
+            <!-- campo oculto -->
+            <input type="hidden" formControlName="id"/>
+
+            <div class="row mb-2">
+                <div class="col-md-6">
+                    <label>Nome do Livro:</label>
+                    <input type="text" formControlName="title" class="form-control" placeholder="Ex: João da Silva"/>
+                    <span class="text-danger" *ngIf="form.title.touched && form.title.invalid">
+                        <span *ngIf="form.title.errors.required">
+                            Por favor, informe o nome do livro.
+                        </span>
+                        <span *ngIf="form.title.errors.minlength">
+                            Por favor, informe no mínimo 8 caracteres.
+                        </span>
+                        <span *ngIf="form.title.errors.maxlength">
+                            Por favor, informe no máximo 150 caracteres.
+                        </span>
+                    </span>
+                </div>
+                <div class="col-md-6">
+                    <label>Nome do Livro:</label>
+                    <input type="text" formControlName="writer" class="form-control" placeholder="Ex: João da Silva"/>
+                    <span class="text-danger" *ngIf="form.writer.touched && form.writer.invalid">
+                        <span *ngIf="form.writer.errors.required">
+                            Por favor, informe o nome do livro.
+                        </span>
+                        <span *ngIf="form.writer.errors.minlength">
+                            Por favor, informe no mínimo 8 caracteres.
+                        </span>
+                        <span *ngIf="form.writer.errors.maxlength">
+                            Por favor, informe no máximo 150 caracteres.
+                        </span>
+                    </span>
+                </div>
+            </div>
+            <div class="row mb-2">
+                <div class="col-md-12">
+                    <input type="submit" [disabled]="!formEdicao.valid" class="btn btn-primary btn-sm"
+                        value="Salvar Alterações" />
+                    &nbsp;
+                    <a [routerLink]="['/consultar-livros']" class="btn btn-light btn-sm">
+                        Voltar para a consulta
+                    </a>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
